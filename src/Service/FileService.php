@@ -22,7 +22,7 @@ readonly class FileService
         $serializedDataString = serialize($data);
         if(file_put_contents($filePath, $serializedDataString, LOCK_EX) === false)
         {
-            throw new Exception("file save error");
+            throw new Exception("Saving file error");
         }
     }
 
@@ -33,12 +33,12 @@ readonly class FileService
     {
         if(($f = fopen($filepath, $mode)) === false)
         {
-            throw new Exception("file could not be open $filepath");
+            throw new Exception("File open error, path $filepath");
         }
 
         if (!flock($f, LOCK_SH))
         {
-            throw new Exception("locking error for $filepath");
+            throw new Exception("Locking error, path $filepath");
         }
 
         $file = fread($f, filesize($filepath));
@@ -48,14 +48,14 @@ readonly class FileService
         if (!$file)
         {
             unlink($filepath);
-            throw new Exception("file cannot be read $filename");
+            throw new Exception("Read error, file $filename");
         }
 
         $data = unserialize($file);
 
         if ($data === false)
         {
-            throw new Exception("file cache un-serialization error, file deleted $filename");
+            throw new Exception("Deserialization error, file $filename");
         }
 
         return $data;
