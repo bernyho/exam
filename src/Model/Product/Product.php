@@ -9,9 +9,9 @@ class Product implements Entity
 {
     private int $id;
 
-	private string $name;
+    private string $name;
 
-	private array $badges;
+    private array $badges;
 
     private bool $isActive;
 
