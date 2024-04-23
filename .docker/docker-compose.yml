@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+    php:
+        build:
+            context: ./php
+            args:
+                TIMEZONE: ${TIMEZONE}
+        volumes:
+            - ../:/var/www/exam:cached
+            - .:/var/www/exam
+        networks:
+            - exam_app
+    nginx:
+        build:
+            context: ./nginx
+        volumes:
+            - ../:/var/www/exam:cached
+            - exam_app_vendor:/var/www/exam/vendor
+        ports:
+            - 80:80
+        networks:
+            - exam_app
+        env_file:
+            - .env.nginx.local
+
+volumes:
+    exam_app_vendor:
+
+networks:
+    exam_app:
