@@ -1,5 +1,5 @@
 ## How to set up in a few steps?
-- Clone this repository, ```git clone <url:github.com>```
+- Clone this repository, ```git clone git@github.com:bernyho/logio.git```
 - In project root run ```make start``` in the terminal and wait till it's done
 - In container bash (```make bash```) run ```composer i```
 - Just visit url http://localhost/product?id=3
